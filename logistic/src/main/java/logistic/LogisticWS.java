@@ -19,8 +19,13 @@ public class LogisticWS {
 
 	@WebMethod(operationName = "getLogistic")
 	public WSResult getLogistic(
-			@WebParam(name = "inputString") String inputString) {
-		System.out.println(inputString);
+			@WebParam(name = "origDest") String origDest,
+			@WebParam(name = "autonomia") String autonomia,
+			@WebParam(name = "valorLitro") String valorLitro
+			) {
+		System.out.println(origDest);
+		System.out.println(autonomia);
+		System.out.println(valorLitro);
 
 		return logisticBo.getLogistic();
 
