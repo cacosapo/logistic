@@ -22,16 +22,7 @@ public class LogisticWS {
 			@WebParam(name = "inputString") String inputString) {
 		System.out.println(inputString);
 
-		ArrayList<String> result = new ArrayList<String>();
-		result.add("a");
-		result.add("b");
-		long start = System.currentTimeMillis();
-		WSResult r = new WSResult();
-		r.setResult("result");
-		r.setExecTime(System.currentTimeMillis() - start);
-		r.setStrArray(result);
-		// return logisticBo.getLogistic();
-		return r;
+		return logisticBo.getLogistic();
 
 	}
 
