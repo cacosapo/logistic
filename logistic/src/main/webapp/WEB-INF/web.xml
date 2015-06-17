@@ -15,7 +15,7 @@
  
 	<servlet-mapping>
                 <servlet-name>jaxws-servlet</servlet-name>
-                <url-pattern>/hello</url-pattern>
+                <url-pattern>/logistic</url-pattern>
          </servlet-mapping>
  
          <!-- Register Spring Listener -->

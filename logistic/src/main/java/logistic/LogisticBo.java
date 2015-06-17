@@ -1,8 +1,9 @@
 package logistic;
 
-public interface HelloWorldBo{
+public interface LogisticBo{
 
 	String getHelloWorld();
+	String getLogistic();
 	
 	
 	
