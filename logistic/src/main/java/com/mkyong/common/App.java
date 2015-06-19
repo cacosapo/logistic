@@ -14,15 +14,24 @@ public class App
         Session session = HibernateUtil.getSessionFactory().openSession();
         
         session.beginTransaction();
+        UserDetails usr= new UserDetails();
+        
+        usr.setUserId(1);
+        usr.setUserName("Joao");
         Stock stock = new Stock();
         
-        stock.setStockCode("4715");
-        stock.setStockName("GENM");
+        stock.setStockCode("4716");
+        stock.setStockName("GANM");
         
 //        session.save(stock);
+        session.save(usr);
        
         Query query = session.createQuery("from Stock");
         java.util.List list = query.list();
+        for (Object object : list) {
+			System.out.println(((Stock)object).getStockCode());
+			System.out.println(((Stock)object).getStockName());
+		}
         System.out.println(list);
         
         //session.delete(stock);
