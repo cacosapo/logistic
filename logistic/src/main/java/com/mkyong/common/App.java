@@ -1,5 +1,7 @@
 package com.mkyong.common;
 
+import javax.persistence.PersistenceContext;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 
@@ -7,6 +9,8 @@ import com.mkyong.persistence.HibernateUtil;
 
 public class App 
 {
+	
+	@PersistenceContext(unitName="crm") Session session1;
     public static void main( String[] args )
     {
         System.out.println("Maven + Hibernate + MySQL");
@@ -15,6 +19,12 @@ public class App
         
         session.beginTransaction();
         UserDetails usr= new UserDetails();
+        
+        Lane ln = new Lane();
+        ln.setLaneId("AB");
+        ln.setSource("A");
+        ln.setDestination("B");
+        ln.setWeigth(10);
         
         usr.setUserId(1);
         usr.setUserName("Joao");
@@ -25,6 +35,7 @@ public class App
         
 //        session.save(stock);
         session.save(usr);
+        session.save(ln);
        
         Query query = session.createQuery("from Stock");
         java.util.List list = query.list();
