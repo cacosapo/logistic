@@ -34,8 +34,8 @@ public class LogisticBoImpl extends SpringBeanAutowiringSupport implements Logis
 	private List<Edge> edges;
 
 	public WSResult getLogistic(String orig,String dest,
-			String autonomia,
-			String valorLitro
+			Integer autonomia,
+			Double valorLitro
 			){
 		// Bug Fix WS is not autowiring
 		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
@@ -61,13 +61,14 @@ public class LogisticBoImpl extends SpringBeanAutowiringSupport implements Logis
 					lane.getWeigth());
 		}
 		lanedao.closeCurrentSession();
-		
+		Vertex origVert = new Vertex(orig, orig);
+		Vertex destVert = new Vertex(dest, dest);
 		Graph graph = new Graph(nodes, edges);
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
-		dijkstra.execute(new Vertex(orig, orig));
-		LinkedList<Vertex> path = dijkstra.getPath(new Vertex(dest, dest));
+		dijkstra.execute(origVert);
+		LinkedList<Vertex> path = dijkstra.getPath(destVert);
 		System.out.println(dijkstra.getDistance());
-		Integer dist = dijkstra.getDistance().get(dest);
+		Double dist = new Double(dijkstra.getDistance().get(destVert));
 		System.out.println(path);
 
 		WSResult r = new WSResult();
@@ -76,6 +77,7 @@ public class LogisticBoImpl extends SpringBeanAutowiringSupport implements Logis
 			resultList.add(vertex.getId());
 		}
 		r.setPath(resultList);
+		r.setCusto((dist/autonomia)*valorLitro);
 //		r.setCusto(dijkstra.getDistance().get(dest));
 //		r.setStrArray(result);
 		

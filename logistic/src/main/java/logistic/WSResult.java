@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class WSResult {
 
-	private String custo;
+	private Double custo;
 	private List<String> path;
 
 	@XmlElement
@@ -22,11 +22,11 @@ public class WSResult {
 	}
 
 	@XmlElement
-	public String getCusto() {
+	public Double getCusto() {
 		return this.custo;
 	}
 
-	public void setCusto(String custo) {
+	public void setCusto(Double custo) {
 		this.custo = custo;
 	}
 

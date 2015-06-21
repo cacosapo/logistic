@@ -1,23 +1,15 @@
 package logistic;
 
-import javax.annotation.PostConstruct;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
-
-import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+import javax.xml.bind.annotation.XmlElement;
 
 @WebService
 public class LogisticWS{
 
 	// DI via Spring
 	private LogisticBo logisticBo;
-	
-	
-	@PostConstruct
-	public void initIt() throws Exception {
-		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
-	}
 	
 	@WebMethod(exclude = true)
 	public void setLogisticBo(LogisticBo logisticBo) {
@@ -26,10 +18,14 @@ public class LogisticWS{
 
 	@WebMethod(operationName = "getLogistic")
 	public WSResult getLogistic(
+			@XmlElement(required=true)
 			@WebParam(name = "Orig") String orig,
+			@XmlElement(required=true)
 			@WebParam(name = "dest") String dest,
-			@WebParam(name = "autonomia") String autonomia,
-			@WebParam(name = "valorLitro") String valorLitro
+			@XmlElement(required=true)
+			@WebParam(name = "autonomia") Integer autonomia,
+			@XmlElement(required=true)
+			@WebParam(name = "valorLitro") Double valorLitro
 			) {
 		System.out.println(orig);
 		System.out.println(dest);
