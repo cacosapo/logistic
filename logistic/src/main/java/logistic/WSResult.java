@@ -1,6 +1,7 @@
 package logistic;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -8,35 +9,25 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class WSResult {
 
-	private long execTime;
-	private String result;
-	private ArrayList<String> strArray;
+	private String custo;
+	private List<String> path;
 
 	@XmlElement
-	public ArrayList<String> getStrArray() {
-		return strArray;
+	public List<String> getPath() {
+		return path;
 	}
 
-	public void setStrArray(ArrayList<String> strArray) {
-		this.strArray = strArray;
-	}
-
-	@XmlElement
-	public long getExecTime() {
-		return this.execTime;
-	}
-
-	public void setExecTime(long execTime) {
-		this.execTime = execTime;
+	public void setPath(List<String> path) {
+		this.path = path;
 	}
 
 	@XmlElement
-	public String getResult() {
-		return this.result;
+	public String getCusto() {
+		return this.custo;
 	}
 
-	public void setResult(String result) {
-		this.result = result;
+	public void setCusto(String custo) {
+		this.custo = custo;
 	}
 
 }

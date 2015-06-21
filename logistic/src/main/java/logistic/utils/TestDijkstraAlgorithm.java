@@ -1,6 +1,7 @@
 package logistic.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,16 +16,19 @@ public class TestDijkstraAlgorithm {
 	public void testExcute() {
 		nodes = new ArrayList<Vertex>();
 		edges = new ArrayList<Edge>();
+		
+//		ArrayList<String> initVertex = Arrays.asList("A","B");
+		
 		for (int i = 0; i < 11; i++) {
 			Vertex location = new Vertex("Node_" + i, "Node_" + i);
 			nodes.add(location);
 		}
 
-		addLane("Edge_0", 0, 1, 85);
-		addLane("Edge_1", 0, 2, 217);
-		addLane("Edge_2", 0, 4, 173);
+		addLane("asdfr", 0, 1, 85);
+		addLane("dsaf", 0, 2, 217);
+		addLane("asdf", 0, 4, 173);
 		addLane("Edge_3", 2, 6, 186);
-		addLane("Edge_4", 2, 7, 103);
+		addLane("dfa", 2, 7, 103);
 		addLane("Edge_5", 3, 7, 183);
 		addLane("Edge_6", 5, 8, 250);
 		addLane("Edge_7", 8, 9, 84);
@@ -32,6 +36,13 @@ public class TestDijkstraAlgorithm {
 		addLane("Edge_9", 4, 9, 502);
 		addLane("Edge_10", 9, 10, 40);
 		addLane("Edge_11", 1, 10, 600);
+		
+		
+//		A - 0
+//		B - 1
+//		C - 2
+//		D - 3
+//		E - 4
 
 		// Lets check from location Loc_1 to Loc_10
 		Graph graph = new Graph(nodes, edges);

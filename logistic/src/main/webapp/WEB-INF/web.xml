@@ -7,6 +7,11 @@
 	<display-name>Spring + JAX-WS</display-name>
 
 
+	<context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/applicationContext.xml</param-value>
+</context-param>  
+
 	<servlet>
     	        <servlet-name>jaxws-servlet</servlet-name>
     	       <servlet-class>
@@ -20,10 +25,10 @@
          </servlet-mapping>
  
          <!-- Register Spring Listener -->
-  	<listener>
-    	        <listener-class>
-    		     org.springframework.web.context.ContextLoaderListener
-    	        </listener-class>
-  	</listener>
+  <listener>
+   <listener-class>
+        org.springframework.web.context.ContextLoaderListener
+   </listener-class>
+</listener> 
  
 </web-app>

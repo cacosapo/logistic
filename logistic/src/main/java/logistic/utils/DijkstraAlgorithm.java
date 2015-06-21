@@ -18,6 +18,10 @@ public class DijkstraAlgorithm {
 	private Map<Vertex, Vertex> predecessors;
 	private Map<Vertex, Integer> distance;
 
+	public Map<Vertex, Integer> getDistance() {
+		return distance;
+	}
+
 	public DijkstraAlgorithm(Graph graph) {
 		// create a copy of the array so that we can operate on this array
 		this.nodes = new ArrayList<Vertex>(graph.getVertexes());

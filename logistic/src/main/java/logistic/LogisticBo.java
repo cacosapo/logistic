@@ -1,10 +1,7 @@
 package logistic;
 
-public interface LogisticBo{
+public interface LogisticBo {
 
-	String getHelloWorld();
-	WSResult getLogistic();
-	
-	
-	
+	WSResult getLogistic(String orig, String dest, String autonomia, String valorLitro);
+
 }

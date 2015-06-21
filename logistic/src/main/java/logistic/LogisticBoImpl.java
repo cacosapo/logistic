@@ -2,33 +2,98 @@ package logistic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
+import javax.annotation.PostConstruct;
 
-public class LogisticBoImpl implements LogisticBo{
+import logistic.utils.DijkstraAlgorithm;
+import logistic.utils.Edge;
+import logistic.utils.Graph;
+import logistic.utils.Vertex;
 
-	public String getHelloWorld(){
-		return "JAX-WS + Spring!";
-	}
-	public WSResult getLogistic(){
-		HashMap<String, Integer> hashLog = new HashMap<String, Integer>();
-		hashLog.put("AB", 10);
-		hashLog.put("BD", 15);
-		hashLog.put("AC", 20);
-		hashLog.put("CD", 30);
-		hashLog.put("BE", 50);
-		hashLog.put("DE", 30);
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Service;
+import org.springframework.web.context.support.SpringBeanAutowiringSupport;
+
+import com.mkyong.common.Lane;
+import com.mkyong.persistence.LaneDaoInterface;
+
+@Service
+public class LogisticBoImpl extends SpringBeanAutowiringSupport implements LogisticBo {
+
+	@Autowired
+	private LogisticBo logisticBo;
+	@Autowired
+	private LaneDaoInterface lanedao;
+	
+	private List<Vertex> nodes;
+	private List<Edge> edges;
+
+	public WSResult getLogistic(String orig,String dest,
+			String autonomia,
+			String valorLitro
+			){
+		// Bug Fix WS is not autowiring
+		SpringBeanAutowiringSupport.processInjectionBasedOnCurrentContext(this);
 		
+		nodes = new ArrayList<Vertex>();
+		edges = new ArrayList<Edge>();
+		
+		// Populate data from database
+		lanedao.openCurrentSession();
+		List<String> vertexList = lanedao.vertexList();
+		for (String string : vertexList) {
+			Vertex location = new Vertex(string, string);
+			nodes.add(location);
+		}
+		lanedao.closeCurrentSession();
+		
+		lanedao.openCurrentSession();
+		List<Lane> laneList = lanedao.findAll();
+		for (Lane lane : laneList) {
+			addLane(lane.getLaneId(),
+					new Vertex(lane.getSource(), lane.getSource()), new Vertex(
+							lane.getDestination(), lane.getDestination()),
+					lane.getWeigth());
+		}
+		lanedao.closeCurrentSession();
+		
+		Graph graph = new Graph(nodes, edges);
+		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
+		dijkstra.execute(new Vertex(orig, orig));
+		LinkedList<Vertex> path = dijkstra.getPath(new Vertex(dest, dest));
+		System.out.println(dijkstra.getDistance());
+		Integer dist = dijkstra.getDistance().get(dest);
+		System.out.println(path);
 
-		ArrayList<String> result = new ArrayList<String>();
-		result.add("a");
-		result.add("b");
-		long start = System.currentTimeMillis();
 		WSResult r = new WSResult();
-		r.setResult("teste");
-		r.setExecTime(System.currentTimeMillis() - start);
-		r.setStrArray(result);
+		ArrayList<String> resultList = new ArrayList<String>();
+		for (Vertex vertex : path) {
+			resultList.add(vertex.getId());
+		}
+		r.setPath(resultList);
+//		r.setCusto(dijkstra.getDistance().get(dest));
+//		r.setStrArray(result);
 		
 		return r;
+	}
+	
+	private void addLane(String laneId, int sourceLocNo, int destLocNo,
+			int duration) {
+		Edge lane = new Edge(laneId, nodes.get(sourceLocNo),
+				nodes.get(destLocNo), duration);
+		edges.add(lane);
+	}
+	
+	private void addLane(String laneId, Vertex source, Vertex destination,
+			int duration) {
+		Edge lane = new Edge(laneId, source,
+				destination, duration);
+		edges.add(lane);
 	}
 	
 }
