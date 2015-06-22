@@ -24,7 +24,7 @@
 	</wss:binding>
 
 	<!-- Web service methods -->
-	<bean id="logisticWs" class="logistic.LogisticWS">
+	<bean id="logisticWs" class="logistic.ws.LogisticWS">
 		<property name="logisticBo" ref="LogisticBo" />
 	</bean>
 

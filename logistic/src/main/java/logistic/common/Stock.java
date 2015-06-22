@@ -1,4 +1,4 @@
-package com.mkyong.common;
+package logistic.common;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

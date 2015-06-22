@@ -1,26 +1,19 @@
 package logistic;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
+import logistic.common.Lane;
+import logistic.persistence.LaneDaoInterface;
 import logistic.utils.DijkstraAlgorithm;
 import logistic.utils.Edge;
 import logistic.utils.Graph;
 import logistic.utils.Vertex;
 
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.support.SpringBeanAutowiringSupport;
-
-import com.mkyong.common.Lane;
-import com.mkyong.persistence.LaneDaoInterface;
 
 @Service
 public class LogisticBoImpl extends SpringBeanAutowiringSupport implements LogisticBo {
@@ -68,6 +61,7 @@ public class LogisticBoImpl extends SpringBeanAutowiringSupport implements Logis
 		dijkstra.execute(origVert);
 		LinkedList<Vertex> path = dijkstra.getPath(destVert);
 		System.out.println(dijkstra.getDistance());
+		System.out.println(dijkstra.getDistance().get(destVert));
 		Double dist = new Double(dijkstra.getDistance().get(destVert));
 		System.out.println(path);
 

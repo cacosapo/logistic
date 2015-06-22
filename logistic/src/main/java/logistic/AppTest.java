@@ -1,4 +1,4 @@
-package com.mkyong;
+package logistic;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

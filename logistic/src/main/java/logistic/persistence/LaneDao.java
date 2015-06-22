@@ -1,10 +1,12 @@
-package com.mkyong.persistence;
+package logistic.persistence;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import logistic.common.Lane;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -14,8 +16,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Repository;
-
-import com.mkyong.common.Lane;
 
 @Repository
 public class LaneDao implements LaneDaoInterface<Lane, String> {
@@ -103,7 +103,6 @@ public class LaneDao implements LaneDaoInterface<Lane, String> {
 		}
 	}
 
-	@Override
 	public List vertexList() {
 		Set<String> vertex = new HashSet<String>();
 		String hql = "from Lane";

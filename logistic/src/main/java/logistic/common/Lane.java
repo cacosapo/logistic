@@ -1,4 +1,4 @@
-package com.mkyong.common;
+package logistic.common;
 
 import static javax.persistence.GenerationType.IDENTITY;
 

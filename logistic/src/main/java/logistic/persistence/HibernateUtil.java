@@ -1,4 +1,4 @@
-package com.mkyong.persistence;
+package logistic.persistence;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.AnnotationConfiguration;

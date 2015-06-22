@@ -1,11 +1,11 @@
-package com.mkyong.common;
+package logistic.common;
 
 import javax.persistence.PersistenceContext;
 
+import logistic.persistence.HibernateUtil;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
-
-import com.mkyong.persistence.HibernateUtil;
 
 public class App 
 {

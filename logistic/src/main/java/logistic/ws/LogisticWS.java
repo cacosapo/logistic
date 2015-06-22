@@ -1,9 +1,12 @@
-package logistic;
+package logistic.ws;
 
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import javax.xml.bind.annotation.XmlElement;
+
+import logistic.LogisticBo;
+import logistic.WSResult;
 
 @WebService
 public class LogisticWS{
