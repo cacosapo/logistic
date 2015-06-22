@@ -8,3 +8,9 @@ Web de Logistica baseado no algoritmo de Dijkstra
 1 - executar initDatabase.sql </br>
 2 - configurar maven
 
+# Executando
+
+
+
+
+
